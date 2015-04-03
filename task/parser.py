@@ -23,6 +23,25 @@ def main():
     x = x+3
   with open("test.json","wb") as out:
     json.dump(new,out) 
+  
+  with open("upgeo.json","rb"):
+    data = json.load(file)
+
+  for dis in data['features']:
+    try:
+      if new[dis['id']] :
+        dis['properties']['code'] = new[dis['id']][0]
+        dis['properties']['name'] = new[dis['id']][1]
+        dis['properties']['rural_avg_score'] = new[dis['id']][4]
+        dis['properties']['rural_total_school'] = new[dis['id']][3]
+        dis['properties']['total_score'] = new[dis['id']][7]
+        dis['properties']['total_school'] = new[dis['id']][6]
+        dis['properties']['urban_total_school'] = new[dis['id']][9]
+        dis['properties']['urban_avg_score'] = new[dis['id']][10]
+    except:
+        continue
+  with open("upgeo_new.json","wb") as out:
+    json.dump(data,out)
 
 if __name__ == "main" :
   main()
